@@ -1,0 +1,20 @@
+{
+  "name": "heed",
+  "version": "0.0.1",
+  "description": "Node-Webkit Coffee/Stylus Framework",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sekeol Kim",
+  "license": "MIT",
+  "devDependencies": {
+    "node-webkit-builder": "^1.0.13",
+    "rimraf": "^2.5.0",
+    "stylus": "^0.53.0"
+  },
+  "dependencies": {
+    "jquery": "^2.2.0",
+    "lodash": "^4.0.0"
+  }
+}
