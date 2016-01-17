@@ -20,11 +20,12 @@ refresh = (args...) ->
 task 'build', 'Build App', ->
   invoke 'compile:assets'
   exec "cp #{PATHS.ws}/index.html #{PATHS.build}"
+  exec "cp ./package.json #{PATHS.build}"
+
 
 task 'compile', 'Build Executables', ->
   refresh 'targets', 'bin'
   invoke 'build'
-  exec "cp ./package.json #{PATHS.build}"
   NwBuilder = require 'node-webkit-builder'
   nw = new NwBuilder
     files:        dir 'build', '**/**'
@@ -46,5 +47,9 @@ task 'compile:assets:js', 'Build js from coffee', ->
 
 
 task 'compile:assets:css', 'Build CSS from stylus', ->
-  refresh 'build', 'css'
-  exec dir('bin', 'stylus') + " -c -o #{dir 'build','css'} #{dir 'ws', 'styles/main.styl'}"
+  refresh 'build', 'styles'
+  exec dir('bin', 'stylus') + " -o #{dir 'build','styles'} #{dir 'ws', 'styles/main.styl'}"
+
+task 'run', 'Run Application In Build', ->
+  invoke 'build'
+  exec "./node_modules/.bin/nw #{PATHS.build}"
