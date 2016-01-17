@@ -22,14 +22,15 @@ task 'build', 'Build App', ->
   exec "cp #{PATHS.ws}/index.html #{PATHS.build}"
 
 task 'compile', 'Build Executables', ->
+  refresh 'targets', 'bin'
   invoke 'build'
   exec "cp ./package.json #{PATHS.build}"
   NwBuilder = require 'node-webkit-builder'
   nw = new NwBuilder
     files:        dir 'build', '**/**'
     platforms:    ['osx64']
-    buildDir:     PATH.targets + '/bin'
-    cacheDir:     Path.targets + '/cache'
+    buildDir:     PATHS.targets + '/bin'
+    cacheDir:     PATHS.targets + '/cache'
   nw.on 'log', console.log
   nw.build().then -> console.log 'done'
     .catch console.error

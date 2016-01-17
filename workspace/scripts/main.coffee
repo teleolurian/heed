@@ -1,1 +1,9 @@
-$('#id').css 'border', '1px solid green'
+
+
+
+
+showDevTools = ->
+  require('nw.gui').Window.get().showDevTools()
+
+
+showDevTools()
