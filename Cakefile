@@ -39,6 +39,7 @@ task 'compile', 'Build Executables', ->
 task 'compile:assets', 'Build assets', ->
   invoke 'compile:assets:js'
   invoke 'compile:assets:css'
+  invoke 'compile:assets:images'
 
 task 'compile:assets:js', 'Build js from coffee', ->
   refresh 'build', 'js'
@@ -49,6 +50,10 @@ task 'compile:assets:js', 'Build js from coffee', ->
 task 'compile:assets:css', 'Build CSS from stylus', ->
   refresh 'build', 'styles'
   exec dir('bin', 'stylus') + " -o #{dir 'build','styles'} #{dir 'ws', 'styles/main.styl'}"
+
+task 'compile:assets:images', 'Build images from stylus', ->
+  refresh 'build', 'images'
+  exec "cp -r #{dir 'ws', 'images/*'} #{dir 'build', 'images'}"
 
 task 'run', 'Run Application In Build', ->
   invoke 'build'
